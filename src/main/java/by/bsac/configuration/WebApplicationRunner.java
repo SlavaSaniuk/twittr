@@ -30,14 +30,14 @@ public class WebApplicationRunner implements WebApplicationInitializer {
     public void onStartup(ServletContext servletContext) throws ServletException {
 
         //Create "Root" application context
-        AnnotationConfigApplicationContext root_context =
-                new AnnotationConfigApplicationContext();
+        AnnotationConfigWebApplicationContext root_context =
+                new AnnotationConfigWebApplicationContext();
 
         //Register configuration class:
         root_context.register(RootConfiguration.class);
 
         //Set active profiles:
-        root_context.getEnvironment().setActiveProfiles("development");
+        root_context.getEnvironment().setActiveProfiles("production");
 
         //Create "Servlet" application context
         AnnotationConfigWebApplicationContext web_context =
