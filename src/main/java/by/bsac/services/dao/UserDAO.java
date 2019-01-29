@@ -14,8 +14,8 @@ public interface UserDAO {
     User[] findByFirstName(String a_first_name);
     User[] findByLastName(String a_last_name);
     User findByEmail(String a_email);
-    void create();
-    void update();
-    void delete();
+    void create(User a_user);
+    void update(User a_user);
+    void delete(User a_user);
 
 }
