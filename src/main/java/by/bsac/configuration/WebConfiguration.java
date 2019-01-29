@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
@@ -36,8 +37,30 @@ public class WebConfiguration implements WebMvcConfigurer {
         return  viewResolver;
     }
 
+    /**
+     * path to static resourcess handler
+     * @param configurer - DefaultServletHandlerConfigurer.
+     */
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
+    }
+
+    /**
+     * Static resources handler.
+     * @param registry  - stores registrations of resources (css, js, fonts).
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(
+                "/fonts/**",
+                "libs/**",
+                "styles/**",
+                "img/**").addResourceLocations(
+                        "classpath:/static/fonts/",
+                        "classpath:/static/libs/",
+                        "classpath:/static/styles/",
+                        "classpath:/static/img/"
+                   );
     }
 }

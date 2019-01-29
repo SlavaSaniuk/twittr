@@ -14,11 +14,9 @@ public class Post {
     private Integer post_author_id; //Author ID of post
     private LocalDate post_date; //Post creation date (Automatically initialization)
     private LocalTime post_time; //Post creation time
-    public static Integer post_next_id = 1; //Next post ID
 
     /** Class constructors */
     public Post(String a_text, Integer a_post_author_id) {
-        setPostID();
         setPostText(a_text);
         setPostAuthorID(a_post_author_id);
         setPostDate();
@@ -32,9 +30,8 @@ public class Post {
     }
 
     //Automatically set ID to post object.
-    private void setPostID() {
-        this.post_id = post_next_id;
-        post_next_id++;
+    private void setPostID(Integer post_id) {
+        this.post_id = post_id;
     }
 
     public String getPostText() {
@@ -67,14 +64,6 @@ public class Post {
 
     private void setPostTime() {
         this.post_time = LocalTime.now();
-    }
-
-    public static Integer getPostNextID() {
-        return post_next_id;
-    }
-
-    public static void setPostNextID(Integer post_next_id) {
-        Post.post_next_id = post_next_id;
     }
 
     @Override

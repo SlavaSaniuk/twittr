@@ -1,0 +1,73 @@
+/* REGISTRATION FORM BLOCK */
+.registration-block {
+
+    background-color: #D0E47C;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+    position: absolute;
+    z-index: 100;
+    top: 10%;
+    right: 5%;
+
+    width: 460px;
+
+    padding: 20px 20px 40px;
+
+}
+
+.registration-block input {
+    background-color: #E6F2B5;
+    border-color: #C6C6C6;
+    border-style: solid;
+    border-width: 1px;
+    width: 74%;
+    padding-left: 3%;
+    padding-right: 3%;
+    height: 60px;
+    margin-left: 10%;
+    margin-top: 20px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    color: #666666;
+    font-size: 16pt;
+    text-align: center;
+}
+
+.registration-block input:focus {
+    background-color: #E6F2B5;
+    border-color: #4CAF50;
+    border-style: solid;
+    border-width: 2px;
+    width: 74%;
+    margin-top: 20px;
+    padding-left: 3%;
+    padding-right: 3%;
+    height: 60px;
+    margin-left: 10%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.registration-block input[type="submit"] {
+
+    background-color: #4CAF50;
+    width: 60%;
+    height: 50px;
+    margin-left: 20%;
+    border-width: 0;
+    outline: 0;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    color: #FFFFFF;
+    font-family: AGORASP;
+    font-size: 15pt;
+
+}
+
+.registration-block > P {
+    text-align: center;
+    font-size: 10pt;
+    color: #666666;
+}
+
+.registration-block > P > a {
+    color: #4CAF50;
+    font-weight: bold;
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> Log In </title>
+	<link rel="stylesheet" type="text/css" data-th-href="@{/styles/style-template.css}" />
+	<link rel="stylesheet" type="text/css" data-th-href="@{/styles/style-home.css}" />
+</head>
+<body>
+
+	<!-- LOGIN FORM BLOCK -->
+	<div class="login-block" >
+		<form action="#" method="post">
+			<input type="text" name="user_email" placeholder="e-mail" />
+			<input type="password" name="user_pass" placeholder="password" />
+			<input type="submit" name="login_submit" value="login" />
+		</form>
+		<p>	Not registered? <a href="#" data-th-href="@{/registration}"> Create account </a> </p>
+	</div>
+
+</body>
+</html>
