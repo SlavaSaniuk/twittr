@@ -1,4 +1,4 @@
-package by.bsac.services.dao;
+package by.bsac.data.dao;
 
 import by.bsac.models.User;
 

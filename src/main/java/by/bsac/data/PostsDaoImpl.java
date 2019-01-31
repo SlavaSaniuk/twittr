@@ -1,7 +1,7 @@
-package by.bsac.services;
+package by.bsac.data;
 
 import by.bsac.models.Post;
-import by.bsac.services.dao.PostsDAO;
+import by.bsac.data.dao.PostsDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;

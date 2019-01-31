@@ -1,18 +1,27 @@
 package by.bsac.controllers.navigation;
 
+import by.bsac.data.dao.UserDAO;
 import by.bsac.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 /**
  *
  */
-@Controller
+@Controller("registrationController")
 @RequestMapping("/registration")
 public class RegistrationController {
+
+    private UserDAO user_dao;
+
+    @Autowired
+    public RegistrationController(UserDAO user_dao) {
+        this.user_dao = user_dao;
+    }
 
     /** Class methods */
     @RequestMapping(method = RequestMethod.GET)
@@ -22,10 +31,15 @@ public class RegistrationController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String registrerUser(@ModelAttribute User user) {
-        return "/";
+    public String registerUser(User user) {
+
+        this.register(user);
+        return "redirect:/user";
     }
 
+    private void register(User a_user) {
+        this.user_dao.create(a_user);
+    }
 
 
 }

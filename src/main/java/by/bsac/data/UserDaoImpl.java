@@ -1,7 +1,7 @@
-package by.bsac.services;
+package by.bsac.data;
 
 import by.bsac.models.User;
-import by.bsac.services.dao.UserDAO;
+import by.bsac.data.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -22,11 +22,9 @@ import java.util.Map;
 public class UserDaoImpl implements UserDAO {
 
     /* Class global variables */
-    private DataSource data_source; // Data source.
     private NamedParameterJdbcTemplate je; //JDBC Template (DAO engine).
 
     /* Class constructors */
-    @Autowired
     public UserDaoImpl(DataSource data_source) {
         this.je = new NamedParameterJdbcTemplate(data_source);
     }
@@ -46,7 +44,7 @@ public class UserDaoImpl implements UserDAO {
     public User findByID(Integer a_id) {
 
         //SQL statement syntax:
-        String sql = "SELECT * FROM USER WHERE USER_ID = :id LIMIT 1;";
+        String sql = "SELECT * FROM USER WHERE USER_ID = :id LIMIT 0,1;";
 
         //Map of named parameters to SQL statement:
         Map<String, Object> named_parameters = new HashMap<>();
@@ -89,7 +87,7 @@ public class UserDaoImpl implements UserDAO {
     public User findByEmail(String a_email) {
 
         //SQL statement syntax:
-        String sql = "SELECT * FROM USER WHERE USER_ID = :email LIMIT 1;";
+        String sql = "SELECT USER_ID, USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME FROM USER WHERE USER_EMAIL = :email;";
 
         //Map of named parameters to SQL statement:
         Map<String, Object> named_parameters = new HashMap<>();
@@ -105,7 +103,7 @@ public class UserDaoImpl implements UserDAO {
 
         //SQL statement syntax:
         String sql = "INSERT INTO USER(USER_EMAIL, USER_PASSWORD, USER_FNAME, USER_LNAME) " +
-                "VALUES(':email', ':password', ':fname', ':lname');";
+                "VALUES(:email, :password, :fname, :lname);";
 
         //Map of named parameters to SQL statement:
         Map<String, Object> named_parameters = new HashMap<>();
@@ -141,7 +139,7 @@ public class UserDaoImpl implements UserDAO {
     public void delete(User a_user) {
 
         //SQL statement syntax:
-        String sql = "DELETE FROM USER WHERE USER_ID = :id LIMIT 1;";
+        String sql = "DELETE FROM USER WHERE USER_ID = :id;";
 
         //Map of named parameters to SQL statement:
         Map<String, Object> named_parameters = new HashMap<>();
@@ -151,7 +149,7 @@ public class UserDaoImpl implements UserDAO {
         this.je.update(sql, named_parameters);
     }
 
-    //Custom row mapper.
+    //Users row mapper.
     private static class UsersRowMapper implements RowMapper<User> {
         @Override
         public User mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -164,5 +162,4 @@ public class UserDaoImpl implements UserDAO {
             return user;
         }
     }
-
 }

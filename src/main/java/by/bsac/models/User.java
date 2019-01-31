@@ -1,11 +1,9 @@
 package by.bsac.models;
 
-import java.io.Serializable;
-
 /**
  * User model.
  */
-public class User implements Serializable {
+public class User{
 
     /* Class global variables */
     private Integer userId; //User ID (creating by database autoincrement).

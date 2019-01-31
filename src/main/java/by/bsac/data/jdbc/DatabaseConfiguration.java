@@ -3,7 +3,6 @@ package by.bsac.data.jdbc;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jndi.JndiObjectFactoryBean;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -16,10 +15,9 @@ import javax.sql.DataSource;
  */
 @Configuration
 @PropertySource("classpath:properties/database.properties")
+@ComponentScan(basePackages = "by.bsac.data")
 public class DatabaseConfiguration {
 
-
-    /** Class global variables */
 
     @Value("${DB.URL}")
     private String db_url; //Database URL
@@ -32,6 +30,8 @@ public class DatabaseConfiguration {
 
     @Value("${DB.PASSWORD}")
     private String db_password; //Database administrator password
+
+    /* Beans configuration */
 
     @Profile("development")
     @Bean
@@ -55,7 +55,5 @@ public class DatabaseConfiguration {
             return (DataSource) envCtx.lookup("jdbc/MavenWebApp");
 
     }
-
-
 
 }
