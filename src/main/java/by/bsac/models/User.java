@@ -2,56 +2,51 @@ package by.bsac.models;
 
 /**
  * User model.
+ * Factory for all users objects.
  */
-public class User{
+public class User {
 
     /* Class global variables */
-    private Integer userId; //User ID (creating by database autoincrement).
-    private String firstName; // User first name.
-    private String lastName; // user last name.
-    private String userEmail; // User email address.
-    private String userPassword; //User password.
 
-    /* Class methods
-     * getters and setters
-    */
-    public Integer getUserId() {
-        return userId;
-    }
+    // User identifier (Integer type, Max 8 digit);
+    private int user_id;
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+    // User email address (String type, Max 30 chars);
+    private String user_email;
 
-    public String getFirstName() {
-        return firstName;
-    }
+    // User password (String type, Max 30 chars);
+    private String user_pass;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    /* Class constructors */
+    // Default constructor
 
-    public String getLastName() {
-        return lastName;
-    }
+    /* Class methods */
+    // Getters and setters
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public int getUserId() {
+        return this.user_id;
     }
 
     public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+        return this.user_email;
     }
 
     public String getUserPassword() {
-        return userPassword;
+        return this.user_pass;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setUserId(int a_id) {
+        this.user_id = a_id;
     }
+
+    public void setUserEmail(String a_email) {
+        this.user_email = a_email;
+    }
+
+    public void setUserPassword(String a_pass) {
+        this.user_pass = a_pass;
+    }
+
+
+
 }
