@@ -1,6 +1,6 @@
 package by.bsac.controllers.navigation;
 
-import by.bsac.data.dao.UserDAO;
+import by.bsac.data.dao.UserDao;
 import by.bsac.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    private UserDAO user_dao;
+    private UserDao user_dao;
 
     @Autowired
-    public RegistrationController(UserDAO user_dao) {
+    public RegistrationController(UserDao user_dao) {
         this.user_dao = user_dao;
     }
 

@@ -1,35 +1,28 @@
 package by.bsac.controllers.navigation;
 
-import by.bsac.data.dao.UserDAO;
+import by.bsac.exceptions.SignException;
 import by.bsac.models.User;
+import by.bsac.services.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.WebApplicationContext;
 
 /**
  *  Return a home page ("login.html").
  */
 @Controller
-@RequestMapping({ "/", "index.*" })
+@RequestMapping("/")
+@Scope(value = WebApplicationContext.SCOPE_REQUEST)
 public class HomeController {
 
-    /* Class global variables */
-    private UserDAO user_dao;
-
-    /* Class constructors */
-    /**
-     * Create Home page controller.
-     * @param a_user_dao - User DAO object for authentication purposes.
-     */
     @Autowired
-    public HomeController(UserDAO a_user_dao) {
+    private SignService sign_service; // Sign service used for authenticate user in system.
+    private final String home_page = "home"; //This view name.
 
-        //Mapping args
-        this.user_dao = a_user_dao;
-
-    }
 
     /**
      * Method used for handing GET request to home page.
@@ -39,40 +32,26 @@ public class HomeController {
     @RequestMapping(method = RequestMethod.GET)
     public String getHomePage(Model a_model) {
         a_model.addAttribute("user", new User());
-        return "home";
+        return this.home_page;
     }
 
     /**
-     * Method used for handing POST request to home page.
+     * Method used for authenticate user.
      * @param a_user - user inputs from login form.
      * @return - String - logical view name.
      */
     @RequestMapping(method = RequestMethod.POST)
     public String processLoginRequest(User a_user) {
 
-        //Check email and password
-        if(!this.autenticate(a_user)) return "redirect:/";
+        try {
 
-        return "User";
+            this.sign_service.authenticate(a_user);
+
+        } catch (SignException exc) {
+            System.out.println(exc.getMessage());
+        }
+
+        return "user";
     }
-
-
-
-
-
-
-    private boolean autenticate(User a_user) {
-
-        //Get user data from database:
-        User registered_user = this.user_dao.findByEmail(a_user.getUserEmail());
-
-        //Check at null:
-        if (registered_user == null) return false;
-
-        //Compare passwords:
-        // If all OK, return true.
-        return registered_user.getUserPassword().equals(a_user.getUserPassword());
-    }
-
 
 }

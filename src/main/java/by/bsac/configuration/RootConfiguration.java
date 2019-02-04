@@ -7,7 +7,8 @@ import org.springframework.context.annotation.Import;
  *
  */
 @Configuration
-@Import(by.bsac.data.jdbc.DatabaseConfiguration.class)
+@Import({by.bsac.data.jdbc.DatabaseConfiguration.class,
+        by.bsac.services.ServicesConfiguration.class})
 public class RootConfiguration {
 
 }

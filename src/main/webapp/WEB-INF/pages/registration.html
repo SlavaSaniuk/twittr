@@ -11,8 +11,6 @@
 	<!-- REGISTRATION FORM BLOCK -->
 	<div class="registration-block" >
 		<form method="post" data-th-object="${user}" >
-			<input type="text" name="user_first_name" placeholder="first name" data-th-field="*{firstName}"/>
-			<input type="text" name="user_last_name" placeholder="last name" data-th-field="*{lastName}"/>
 			<input type="text" name="user_email" placeholder="e-mail" data-th-field="*{userEmail}"/>
 			<input type="password" name="user_pass" placeholder="password" data-th-field="*{userPassword}"/>
 			<input type="submit" name="register_submit" value="register" />

@@ -1,12 +1,10 @@
 package by.bsac.data.jdbc;
 
-import org.springframework.beans.factory.annotation.Value;
+import by.bsac.data.UserDaoImpl;
+import by.bsac.data.dao.UserDao;
 import org.springframework.context.annotation.*;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 
@@ -16,44 +14,16 @@ import javax.sql.DataSource;
 @Configuration
 @PropertySource("classpath:properties/database.properties")
 @ComponentScan(basePackages = "by.bsac.data")
+@Import(by.bsac.data.jdbc.DataSourcesFactory.class)
 public class DatabaseConfiguration {
 
-
-    @Value("${DB.URL}")
-    private String db_url; //Database URL
-
-    @Value("${DB.DRIVER}")
-    private String db_driverClass; //Database driver class (default: MySQL)
-
-    @Value("${DB.USERNAME}")
-    private String db_username; //Database administrator login
-
-    @Value("${DB.PASSWORD}")
-    private String db_password; //Database administrator password
-
-    /* Beans configuration */
-
-    @Profile("development")
-    @Bean
-    @Description("DataSource for development.")
-    public DriverManagerDataSource devDataSource() {
-        DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setUrl(db_url);
-        ds.setDriverClassName(db_driverClass);
-        ds.setUsername(db_username);
-        ds.setPassword(db_password);
-        return ds;
+    @Bean("user_dao")
+    @Description("User DAO Implementation")
+    @Resource(name = "data_source")
+    public UserDao getUserDao(DataSource ds) {
+        return new UserDaoImpl(ds);
     }
 
-    @Profile("production")
-    @Bean
-    @Description("DataSource for production.")
-    public DataSource prodDataSource() throws NamingException {
 
-            Context ctx = new InitialContext();
-            Context envCtx = (Context) ctx.lookup("java:comp/env");
-            return (DataSource) envCtx.lookup("jdbc/MavenWebApp");
-
-    }
 
 }

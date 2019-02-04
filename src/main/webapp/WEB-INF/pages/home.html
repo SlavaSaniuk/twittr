@@ -10,9 +10,9 @@
 
 	<!-- LOGIN FORM BLOCK -->
 	<div class="login-block" >
-		<form action="#" method="post">
-			<input type="text" name="user_email" placeholder="e-mail" />
-			<input type="password" name="user_pass" placeholder="password" />
+		<form method="post" data-th-object="${user}">
+			<input type="text" name="user_email" placeholder="e-mail" data-th-field="*{userEmail}" />
+			<input type="password" name="user_pass" placeholder="password" data-th-field="*{userPassword}" />
 			<input type="submit" name="login_submit" value="login" />
 		</form>
 		<p>	Not registered? <a href="#" data-th-href="@{/registration}"> Create account </a> </p>
